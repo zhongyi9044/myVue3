@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="../node_modules/@vue/reactivty/dist/reactivity.global.js"></script>
+    <script>
+      let { ref, shallowRef,effect,toRef,reactive ,toRefs} = VueReactivity
+      let name = reactive([1,2,3,4,5,6,[7,8,9]])
+      let r1=toRefs(name)
+      console.log(r1)
+      effect(()=>{
+        app.innerHTML=r1[2].value+'m'+r1[6].value
+      })
+
+    </script>
+  </body>
+</html>

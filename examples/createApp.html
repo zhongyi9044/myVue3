@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="../node_modules/@vue/runtime-dom/dist/runtime-dom.global.js"></script>
+    <script>
+      let { createApp, h, reactive, ref } = VueRuntimeDom
+      let App = {
+        setup(props, context) {
+          let state = ref(true)
+          setTimeout(() => {
+            state.value = false
+          }, 3000)
+
+          return (proxy) => {
+            // h('div', {a:1})
+            // h('div',{}, h('span'))
+            // h('div', {}, 'hello world')
+            // h('div',h('span'))
+            // h('div',h('span'),h('span'))
+            // h('div', null,'a','b','c')
+            // h('div',null,h('span'),h('span'))
+
+            // return state.value
+            //   ? h('div', { style: { color: 'red' } }, [
+            //       h('div', { key: 'a' }, 'a'),
+            //       h('div', { key: 'b' }, 'b'),
+            //       h('div', { key: 'c', style: { color: 'blue' } }, 'c'),
+            //       h('div', { key: 'd' }, 'd'),
+            //       h('div', { key: 'e' }, 'e'),
+            //       h('div', { key: 'q' }, 'q'),
+            //       h('div', { key: 'f' }, 'f'),
+            //       h('div', { key: 'g' }, 'g'),
+            //     ])
+            //   : h('div', { style: { color: 'blue' } }, [
+            //       h('div', { key: 'a' }, 'a'),
+            //       h('div', { key: 'b' }, 'b'),
+            //       h('div', { key: 'e' }, 'e'),
+            //       h('div', { key: 'c', style: { color: 'green' } }, 'c'),
+            //       h('div', { key: 'd' }, 'd'),
+            //       h('div', { key: 'h' }, 'h'),
+            //       h('div', { key: 'f' }, 'f'),
+            //       h('div', { key: 'g' }, 'g'),
+            //     ])
+
+            return state.value
+              ? h('div', { style: { color: 'red' } }, [
+                  h('div', { key: 'b' }, 'b'),
+                  h('div', { key: 'a' }, 'a'),
+                  h('div', { key: 'c', style: { color: 'blue' } }, 'c'),
+                  h('div', { key: 'q' }, 'q'),
+                  h('div', { key: 'g' }, 'g'),
+                  h('div', { key: 'e' }, 'e'),
+                  h('div', { key: 'f' }, 'f'),
+                  h('div', { key: 'd' }, 'd'),
+                ])
+              : h('div', { style: { color: 'blue' } }, [
+                  h('div', { key: 'a' }, 'a'),
+                  h('div', { key: 'g' }, 'g'),
+                  h('div', { key: 'e' }, 'e'),
+                  h('div', { key: 'h' }, 'h'),
+                  h('div', { key: 'b' }, 'b'),
+                  h('div', { key: 'f' }, 'f'),
+                  h('div', { key: 'c', style: { color: 'green' } }, 'c'),
+                  h('div', { key: 'd' }, 'd'),
+                ])
+          }
+        },
+        render(proxy) {
+          //h的写法：
+          // 1. h('div',{})
+          // 2. h('div','hello world')
+          // 3. h('div',{},'hello world')
+          // 4. h('div',{},[h('p',{}),'span'])
+          // 5. h('div',{},'p','span')
+          return h('div', {}, 'hello world')
+        },
+      }
+      createApp(App, { name: 'zf', age: 12 }).mount('#app')
+    </script>
+  </body>
+</html>
